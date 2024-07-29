@@ -39,6 +39,7 @@ model Candidate {
 
   name          String
   email         String @unique
+  password      String
   contactNumber String
   country       String
 
@@ -69,9 +70,11 @@ model Company {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   name String
-  size Int
+  email String @unique
+  password String
 
   about    String
+  size Int
   location String
   jobs     Job[]
 
