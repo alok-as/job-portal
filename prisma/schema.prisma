@@ -40,12 +40,11 @@ model Candidate {
   name          String
   email         String @unique
   password      String
-  contactNumber String
-  country       String
+  contactNumber String?
 
-  bio               String
-  yearsOfExperience Int
-  educationLevel    String
+  bio               String?
+  yearsOfExperience Int? @default(0)
+  educationLevel    String?
 
   profilePic    String?
   portfolioLink String?
@@ -74,7 +73,7 @@ model Company {
   password String
 
   about    String
-  size Int
+  size     Int @default(1)
   location String
   jobs     Job[]
 

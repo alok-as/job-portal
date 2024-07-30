@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import prismaDb from "@/lib/prisma";
-import { updateCompanySchema } from "@/schema/company";
+import { updateCandidateSchema } from "@/schema/candidate";
 
 export const PATCH = async (
 	req: Request,
@@ -9,28 +9,48 @@ export const PATCH = async (
 ) => {
 	try {
 		const reqData = await req.json();
-		const { name, about, location, size } = updateCompanySchema.parse(reqData);
+		const {
+			name,
+			bio,
+			company,
+			contactNumber,
+			designation,
+			educationLevel,
+			portfolioLink,
+			profilePic,
+			yearsOfExperience,
+		} = updateCandidateSchema.parse(reqData);
 
-		const company = await prismaDb.company.update({
+		await prismaDb.candidate.update({
 			where: { id: params.id },
-			data: { name, about, location, size },
+			data: {
+				name,
+				bio,
+				company,
+				contactNumber,
+				designation,
+				educationLevel,
+				portfolioLink,
+				profilePic,
+				yearsOfExperience,
+			},
 		});
 
 		return NextResponse.json(
 			{
 				success: true,
 				data: null,
-				message: "Company updated successfully",
+				message: "Candidate updated successfully",
 			},
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.log("Error updating company", error);
+		console.log("Error updating candidate", error);
 		return NextResponse.json(
 			{
 				success: false,
 				data: null,
-				message: "Error updating company",
+				message: "Error updating candidate",
 			},
 			{
 				status: 400,
@@ -44,7 +64,7 @@ export const DELETE = async (
 	{ params }: { params: { id: string } }
 ) => {
 	try {
-		await prismaDb.company.delete({
+		await prismaDb.candidate.delete({
 			where: { id: params.id },
 		});
 
@@ -52,17 +72,17 @@ export const DELETE = async (
 			{
 				success: true,
 				data: null,
-				message: "Company deleted successfully",
+				message: "Candidate deleted successfully",
 			},
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.log("Error deleting company", error);
+		console.log("Error deleting candidate", error);
 		return NextResponse.json(
 			{
 				success: false,
 				data: null,
-				message: "Error deleting company",
+				message: "Error deleting candidate",
 			},
 			{
 				status: 400,
@@ -76,24 +96,29 @@ export const GET = async (
 	{ params }: { params: { id: string } }
 ) => {
 	try {
-		const company = await prismaDb.company.findUnique({
+		const candidate = await prismaDb.candidate.findUnique({
 			where: { id: params.id },
 			select: {
 				id: true,
 				name: true,
 				email: true,
-				about: true,
-				size: true,
-				location: true,
+				contactNumber: true,
+				bio: true,
+				yearsOfExperience: true,
+				educationLevel: true,
+				profilePic: true,
+				portfolioLink: true,
+				company: true,
+				designation: true,
 			},
 		});
 
-		if (!company) {
+		if (!candidate) {
 			return NextResponse.json(
 				{
 					success: false,
-					data: company,
-					message: "Company not found",
+					data: candidate,
+					message: "Candidate not found",
 				},
 				{ status: 404 }
 			);
@@ -102,18 +127,18 @@ export const GET = async (
 		return NextResponse.json(
 			{
 				success: true,
-				data: company,
-				message: "Company fetched successfully",
+				data: candidate,
+				message: "Candidate fetched successfully",
 			},
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.log("Error fetching company", error);
+		console.log("Error fetching candidate", error);
 		return NextResponse.json(
 			{
 				success: false,
 				data: null,
-				message: "Error fetching company",
+				message: "Error fetching candidate",
 			},
 			{
 				status: 400,
