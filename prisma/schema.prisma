@@ -83,8 +83,8 @@ model Company {
 
 model Industry {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-  Job  Job[]
+  name String @unique
+  jobs  Job[]
 }
 
 enum TYPE {
@@ -96,7 +96,7 @@ enum TYPE {
 model JobType {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name TYPE   @default(FULL_TIME)
-  Job  Job[]
+  jobs  Job[]
 }
 
 enum REMOTE {
@@ -108,13 +108,13 @@ enum REMOTE {
 model Remote {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name REMOTE @default(ON_SITE)
-  Job  Job[]
+  jobs  Job[]
 }
 
 model Level {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
-  Job  Job[]
+  jobs  Job[]
 }
 
 model Job {
