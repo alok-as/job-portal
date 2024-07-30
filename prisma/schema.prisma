@@ -87,33 +87,21 @@ model Industry {
   jobs  Job[]
 }
 
-enum TYPE {
-  FULL_TIME
-  PART_TIME
-  CONTACTUAL
-}
-
 model JobType {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name TYPE   @default(FULL_TIME)
+  name String @unique
   jobs  Job[]
-}
-
-enum REMOTE {
-  ON_SITE
-  REMOTE
-  HYBRID
 }
 
 model Remote {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name REMOTE @default(ON_SITE)
+  name String @unique
   jobs  Job[]
 }
 
 model Level {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
+  name String @unique
   jobs  Job[]
 }
 
