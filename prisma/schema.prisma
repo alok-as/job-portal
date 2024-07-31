@@ -19,6 +19,9 @@ model Skill {
 
   candidateIds String[] @db.ObjectId
   candidates  Candidate[] @relation(fields: [candidateIds], references: [id])
+
+  jobIds String[] @db.ObjectId
+  jobs  Job[] @relation(fields: [jobIds], references: [id])
 }
 
 model Experience {
@@ -109,7 +112,7 @@ model Job {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   title      String
-  desciption String
+  description String
 
   industryId String   @db.ObjectId
   industry   Industry @relation(fields: [industryId], references: [id])
@@ -123,11 +126,14 @@ model Job {
   levelId String @db.ObjectId
   level   Level  @relation(fields: [levelId], references: [id])
 
+  skillIds String[] @db.ObjectId
+  skills   Skill[]  @relation(fields: [skillIds], references: [id])
+
   companyId String  @db.ObjectId
   company   Company @relation(fields: [companyId], references: [id])
 
-  application Application[]
   saved       SavedJob[]
+  application Application[]
 }
 
 model Application {
