@@ -19,18 +19,18 @@ export const POST = async (req: Request) => {
 			{
 				success: true,
 				data: null,
-				message: "Saved Jobs created successfully",
+				message: "Job saved successfully",
 			},
 			{ status: 201 }
 		);
 	} catch (error) {
-		console.log("Error creating a Saved Jobs", error);
+		console.log("Error saving Job", error);
 
 		return NextResponse.json(
 			{
 				success: false,
 				data: null,
-				message: "Error creating Saved Jobs",
+				message: "Error saving Job",
 			},
 			{ status: 400 }
 		);
