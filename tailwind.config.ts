@@ -22,10 +22,13 @@ const config: Config = {
 		},
 		extend: {
 			colors: {
-				link: {
-					400: "#05264e",
+				"js-grey": {
+					200: "#e0e6f6",
+					400: "#b4c0e0",
+					600: "#6c757d",
 				},
-				primary: {
+				"js-primary": {
+					300: "#3c65f5",
 					400: "#3c65f5",
 					800: "#05264e",
 				},

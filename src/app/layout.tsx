@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import ToastProvider from "@/providers/toast-provider";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
 
@@ -20,8 +21,8 @@ const RootLayout = ({
 	<html lang="en">
 		<body className={inter.className}>
 			<Header />
-			{/* <main>{children}</main> */}
-			{/* <footer>Footer</footer> */}
+			<main>{children}</main>
+			<ToastProvider />
 		</body>
 	</html>
 );

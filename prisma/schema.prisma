@@ -75,9 +75,9 @@ model Company {
   email String @unique
   password String
 
-  about    String
-  size     Int @default(1)
-  location String
+  about    String?
+  size     Int? @default(1)
+  location String?
   jobs     Job[]
 
   createdAt DateTime @default(now())
