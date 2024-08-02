@@ -2,24 +2,16 @@
 import { InputField } from "@/components/ui/input-field";
 import { Button } from "@/components/ui/button";
 
-import useCompanySignUp from "./use-company-sign-up";
+import useCompanySignIn from "./use-company-sign-in";
 import Link from "next/link";
 
-export const CompanySignUp = () => {
+export const CompanySignIn = () => {
 	const { isLoading, handleSubmit, onSubmit, register, errors } =
-		useCompanySignUp();
+		useCompanySignIn();
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className="flex flex-col gap-4">
-				<InputField
-					type="text"
-					{...register("name")}
-					label="Company Name"
-					placeholder="Amazon"
-					errorMessage={errors.name?.message}
-				/>
-
 				<InputField
 					type="text"
 					{...register("email")}
@@ -36,12 +28,19 @@ export const CompanySignUp = () => {
 					errorMessage={errors.password?.message}
 				/>
 
-				<Button disabled={isLoading}>Submit & Register</Button>
+				<Link
+					href="/company/forgot-password"
+					className="text-js-grey-600 text-sm text-right"
+				>
+					Forgot Password?
+				</Link>
+
+				<Button disabled={isLoading}>Login</Button>
 
 				<small className="flex justify-center items-center gap-1">
-					<span>Already have an Account?</span>
-					<Link href="/company/sign-in" className="text-js-primary-300">
-						Sign In
+					<span>Don&apos;t have an Account?</span>
+					<Link href="/company/sign-up" className="text-js-primary-300">
+						Sign Up
 					</Link>
 				</small>
 			</div>

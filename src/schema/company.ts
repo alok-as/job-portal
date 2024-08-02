@@ -19,3 +19,12 @@ export const updateCompanySchema = z.object({
 	about: z.string().min(10).optional(),
 	location: z.string().min(3).optional(),
 });
+
+export const loginCompanySchema = z.object({
+	email: z.string().email({ message: "Invalid email address" }),
+	password: z
+		.string()
+		.min(8, { message: "Password should be atleast 8 characters" }),
+});
+
+export type CompanyLoginFields = z.infer<typeof loginCompanySchema>;
