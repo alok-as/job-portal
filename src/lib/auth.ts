@@ -1,8 +1,10 @@
 import { type AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 import { getCompany } from "@/services/server/company";
 import { getCandidate } from "@/services/server/candidate";
+import { env } from "@/env/env";
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -37,6 +39,10 @@ export const authOptions: AuthOptions = {
 				if (!candidate) return null;
 				return candidate;
 			},
+		}),
+		GoogleProvider({
+			clientId: env.GOOGLE_ID,
+			clientSecret: env.GOOGLE_SECRET,
 		}),
 	],
 	pages: {

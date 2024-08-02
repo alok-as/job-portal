@@ -1,5 +1,10 @@
+import { getServerSession } from "next-auth";
+
 import { Logo } from "@/components/ui/logo";
 import { HeaderLink } from "@/components/ui/header-link";
+import { LogoutButton } from "@/components//ui/logout-button";
+
+import { authOptions } from "@/lib/auth";
 
 const links = [
 	{
@@ -19,19 +24,27 @@ const links = [
 	},
 ];
 
-export const Header = () => (
-	<header id="header">
-		<div className="container flex items-center justify-between py-6">
-			<Logo />
-			<nav>
-				<ul className="flex items-center gap-6">
-					{links.map((link) => (
-						<HeaderLink key={link.title} href={link.href} type={link.type}>
-							{link.title}
-						</HeaderLink>
-					))}
-				</ul>
-			</nav>
-		</div>
-	</header>
-);
+export const Header = async () => {
+	const session = await getServerSession(authOptions);
+
+	return (
+		<header id="header">
+			<div className="container flex items-center justify-between py-6">
+				<Logo />
+				<nav>
+					<ul className="flex items-center gap-6">
+						{session ? (
+							<LogoutButton />
+						) : (
+							links.map((link) => (
+								<HeaderLink key={link.title} href={link.href} type={link.type}>
+									{link.title}
+								</HeaderLink>
+							))
+						)}
+					</ul>
+				</nav>
+			</div>
+		</header>
+	);
+};
