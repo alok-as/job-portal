@@ -41,7 +41,7 @@ export const CompanySignUp = () => {
 
 				<small className="flex justify-center items-center gap-1">
 					<span>Already have an Account?</span>
-					<Link href="/company/sign-in" className="text-js-primary-300">
+					<Link href="/company/sign-in" className="text-js-primary-400">
 						Sign In
 					</Link>
 				</small>

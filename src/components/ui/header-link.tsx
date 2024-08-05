@@ -22,7 +22,7 @@ export const headerLinkVariants = cva("text-sm transition duration-200", {
 			primary:
 				"py-3 px-6 text-white bg-js-primary-400 rounded-lg hover:bg-js-primary-800",
 			secondary:
-				"text-js-primary-800 border-b-2 border-b-transparent pb-1 hover:border-b-js-primary-300 hover:text-js-primary-300 font-medium",
+				"text-js-primary-800 border-b-2 border-b-transparent pb-1 hover:border-b-js-primary-400 hover:text-js-primary-400 font-medium",
 		},
 	},
 	defaultVariants: {

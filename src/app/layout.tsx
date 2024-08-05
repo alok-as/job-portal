@@ -30,7 +30,7 @@ const RootLayout = async ({
 			<body className={inter.className}>
 				<AuthProvider session={session}>
 					<Header />
-					<main>{children}</main>
+					<main className="min-h-screen">{children}</main>
 				</AuthProvider>
 				<ToastProvider />
 			</body>

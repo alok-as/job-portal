@@ -15,7 +15,7 @@ export const FormHeader = ({
 }: FormHeaderProps) => {
 	return (
 		<div className={cn("flex flex-col", className)}>
-			<span className="text-xs font-medium text-js-primary-300">{name}</span>
+			<span className="text-xs font-medium text-js-primary-400">{name}</span>
 			<h2 className="text-2xl md:text-3xl lg:text-4xl  mt-3 mb-1 text-js-primary-800 font-bold">
 				{title}
 			</h2>

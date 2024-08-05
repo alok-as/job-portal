@@ -39,7 +39,7 @@ export const CandidateSignIn = () => {
 
 				<small className="flex justify-center items-center gap-1">
 					<span>Don&apos;t have an Account?</span>
-					<Link href="/candidate/sign-up" className="text-js-primary-300">
+					<Link href="/candidate/sign-up" className="text-js-primary-400">
 						Sign Up
 					</Link>
 				</small>

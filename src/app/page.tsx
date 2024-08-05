@@ -1,15 +1,9 @@
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import { Hero } from "@/components/features/home/hero";
 
-const HomePage = async () => {
-	const session = await getServerSession(authOptions);
-
-	return (
-		<main className="min-h-screen">
-			<p>{session?.user?.name}</p>
-			<p>{session?.user?.email}</p>
-		</main>
-	);
-};
+const HomePage = () => (
+	<>
+		<Hero />
+	</>
+);
 
 export default HomePage;
