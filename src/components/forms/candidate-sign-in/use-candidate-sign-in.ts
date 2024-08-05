@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 
-import { CompanyFields, createCompanySchema } from "@/schema/company";
-import { createCompany } from "@/services/client/company";
+import { CandidateLoginFields, loginCandidateSchema } from "@/schema/candidate";
 
-export const useCompanySignUp = () => {
+export const useCandidateSignIn = () => {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -17,28 +17,26 @@ export const useCompanySignUp = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<CompanyFields>({
+	} = useForm<CandidateLoginFields>({
 		defaultValues: {
-			name: "",
 			email: "",
 			password: "",
 		},
-		resolver: zodResolver(createCompanySchema),
+		resolver: zodResolver(loginCandidateSchema),
 	});
 
-	const onSubmit: SubmitHandler<CompanyFields> = async (fields) => {
+	const onSubmit: SubmitHandler<CandidateLoginFields> = async (fields) => {
 		try {
 			setIsLoading(true);
 
-			const response = await createCompany(fields);
-			const data = await response.json();
+			await signIn("credentials", {
+				email: fields.email,
+				password: fields.password,
+				userType: "candidate",
+			});
 
-			if (!response?.ok) {
-				throw new Error(data.message);
-			}
-
-			toast.success(data.message);
-			router.push("/company/sign-in");
+			toast.success("Candidate login successfully");
+			router.push("/");
 			router.refresh();
 		} catch (error) {
 			if (error instanceof Error) {

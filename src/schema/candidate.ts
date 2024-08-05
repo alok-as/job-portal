@@ -7,7 +7,7 @@ export const createCandidateSchema = z.object({
 	password: z.string().min(8),
 });
 
-export type candidateFields = z.infer<typeof createCandidateSchema>;
+export type CandidateFields = z.infer<typeof createCandidateSchema>;
 
 export const updateCandidateSchema = z.object({
 	name: z.string().min(3).optional(),
@@ -26,3 +26,13 @@ export const updateCandidateSchema = z.object({
 	company: z.string().optional(),
 	designation: z.string().optional(),
 });
+
+
+export const loginCandidateSchema = z.object({
+	email: z.string().email({ message: "Invalid email address" }),
+	password: z
+		.string()
+		.min(8, { message: "Password should be atleast 8 characters" }),
+});
+
+export type CandidateLoginFields = z.infer<typeof loginCandidateSchema>;

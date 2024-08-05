@@ -4,11 +4,11 @@ import Link from "next/link";
 import { InputField } from "@/components/ui/input-field";
 import { Button } from "@/components/ui/button";
 
-import { useCompanySignUp } from "@/components/forms/company-sign-up/use-company-sign-up";
+import { useCandidateSignUp } from "@/components/forms/candidate-sign-up/use-candidate-sign-up";
 
-export const CompanySignUp = () => {
+export const CandidateSignUp = () => {
 	const { isLoading, handleSubmit, onSubmit, register, errors } =
-		useCompanySignUp();
+		useCandidateSignUp();
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -16,8 +16,8 @@ export const CompanySignUp = () => {
 				<InputField
 					type="text"
 					{...register("name")}
-					label="Company Name"
-					placeholder="Amazon"
+					label="Full Name"
+					placeholder="Steve Jobs"
 					errorMessage={errors.name?.message}
 				/>
 
@@ -25,7 +25,7 @@ export const CompanySignUp = () => {
 					type="text"
 					{...register("email")}
 					label="Email"
-					placeholder="steven.job@gmail.com"
+					placeholder="steve.jobs@gmail.com"
 					errorMessage={errors.email?.message}
 				/>
 
@@ -41,7 +41,7 @@ export const CompanySignUp = () => {
 
 				<small className="flex justify-center items-center gap-1">
 					<span>Already have an Account?</span>
-					<Link href="/company/sign-in" className="text-js-primary-300">
+					<Link href="/candidate/sign-in" className="text-js-primary-300">
 						Sign In
 					</Link>
 				</small>

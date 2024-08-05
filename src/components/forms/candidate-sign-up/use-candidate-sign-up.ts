@@ -6,10 +6,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 
-import { CompanyFields, createCompanySchema } from "@/schema/company";
-import { createCompany } from "@/services/client/company";
+import { CandidateFields, createCandidateSchema } from "@/schema/candidate";
+import { createCandidate } from "@/services/client/candidate";
 
-export const useCompanySignUp = () => {
+export const useCandidateSignUp = () => {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -17,20 +17,20 @@ export const useCompanySignUp = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<CompanyFields>({
+	} = useForm<CandidateFields>({
 		defaultValues: {
 			name: "",
 			email: "",
 			password: "",
 		},
-		resolver: zodResolver(createCompanySchema),
+		resolver: zodResolver(createCandidateSchema),
 	});
 
-	const onSubmit: SubmitHandler<CompanyFields> = async (fields) => {
+	const onSubmit: SubmitHandler<CandidateFields> = async (fields) => {
 		try {
 			setIsLoading(true);
 
-			const response = await createCompany(fields);
+			const response = await createCandidate(fields);
 			const data = await response.json();
 
 			if (!response?.ok) {
@@ -38,7 +38,7 @@ export const useCompanySignUp = () => {
 			}
 
 			toast.success(data.message);
-			router.push("/company/sign-in");
+			router.push("/candidate/sign-in");
 			router.refresh();
 		} catch (error) {
 			if (error instanceof Error) {

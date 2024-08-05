@@ -5,12 +5,15 @@ import Image from "next/image";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 
-export type CompanySignInButtonProps = ComponentProps<"button">;
+export type OauthSignInButtonProps = ComponentProps<"button">;
 
-export const CompanySignInButton = ({}: CompanySignInButtonProps) => {
+export const OauthSignInButton = ({ children }: OauthSignInButtonProps) => {
 	const onSignIn = async () => {
 		try {
-			await signIn("google", { callbackUrl: "http://localhost:3000" });
+			await signIn("google", {
+				callbackUrl: "http://localhost:3000",
+				role: "test value",
+			});
 		} catch (error) {
 			if (error instanceof Error) {
 				console.log("Error loggin in!", error.message);
@@ -26,7 +29,7 @@ export const CompanySignInButton = ({}: CompanySignInButtonProps) => {
 			onClick={onSignIn}
 		>
 			<Image src="/google.svg" alt="Google" width={20} height={20} />
-			<span>Sign In with Google</span>
+			<span>{children}</span>
 		</button>
 	);
 };

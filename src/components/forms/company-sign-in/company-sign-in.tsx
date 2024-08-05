@@ -2,7 +2,7 @@
 import { InputField } from "@/components/ui/input-field";
 import { Button } from "@/components/ui/button";
 
-import useCompanySignIn from "./use-company-sign-in";
+import { useCompanySignIn } from "@/components/forms/company-sign-in/use-company-sign-in";
 import Link from "next/link";
 
 export const CompanySignIn = () => {

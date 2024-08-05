@@ -4,7 +4,11 @@ import GoogleProvider from "next-auth/providers/google";
 
 import { getCompany } from "@/services/server/company";
 import { getCandidate } from "@/services/server/candidate";
+
+import { compareHash } from "@/utils/hashing";
 import { env } from "@/env/env";
+
+import prismaDb from "./prisma";
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -22,22 +26,28 @@ export const authOptions: AuthOptions = {
 				if (!credentials) return null;
 
 				if (credentials.userType === "company") {
-					const company = await getCompany(
-						credentials.email,
-						credentials.password
-					);
-
+					const company = await getCompany(credentials.email);
 					if (!company) return null;
-					return company;
+
+					const isPasswordCorrect = await compareHash(
+						credentials.password,
+						company.password
+					);
+					if (!isPasswordCorrect) return null;
+
+					return { ...company, role: "company" };
 				}
 
-				const candidate = await getCandidate(
-					credentials.email,
-					credentials.password
-				);
-
+				const candidate = await getCandidate(credentials.email);
 				if (!candidate) return null;
-				return candidate;
+
+				const isPasswordCorrect = await compareHash(
+					credentials.password,
+					candidate.password
+				);
+				if (!isPasswordCorrect) return null;
+
+				return { ...candidate, role: "candidate" };
 			},
 		}),
 		GoogleProvider({
@@ -49,4 +59,44 @@ export const authOptions: AuthOptions = {
 		signIn: "/",
 	},
 	session: { strategy: "jwt" },
+	callbacks: {
+		async signIn({ account, profile }) {
+			if (account?.provider === "google" && profile) {
+				if (profile.email && profile.name) {
+					const { email, name } = profile;
+					const candidate = await getCandidate(email);
+
+					if (!candidate) {
+						await prismaDb.candidate.create({
+							data: {
+								name: name,
+								email: email,
+								password: "",
+							},
+						});
+					}
+				}
+			}
+
+			return true;
+		},
+		async jwt({ user, account, token }) {
+			if (account?.provider === "google") {
+				token.role = "candidate";
+			} else if (user) {
+				token.role = user.role;
+			}
+
+			return token;
+		},
+		async session({ session, token }) {
+			return {
+				...session,
+				user: {
+					...session.user,
+					role: token.role,
+				},
+			};
+		},
+	},
 };

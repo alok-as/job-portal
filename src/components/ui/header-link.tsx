@@ -16,7 +16,7 @@ export const headerItemVariants = cva("transition duration-200", {
 	},
 });
 
-export const headerLinkVariants = cva("text-md transition duration-200", {
+export const headerLinkVariants = cva("text-sm transition duration-200", {
 	variants: {
 		type: {
 			primary:

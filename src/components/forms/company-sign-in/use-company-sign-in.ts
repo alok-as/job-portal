@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { CompanyLoginFields, loginCompanySchema } from "@/schema/company";
 import { signIn } from "next-auth/react";
 
-const useCompanySignIn = () => {
+export const useCompanySignIn = () => {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -50,5 +50,3 @@ const useCompanySignIn = () => {
 
 	return { isLoading, handleSubmit, onSubmit, register, errors };
 };
-
-export default useCompanySignIn;
