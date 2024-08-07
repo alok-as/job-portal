@@ -18,6 +18,7 @@ const config: Config = {
 				md: "100%", // (Tablets) (768px to 1024px)
 				lg: "1024px", // (Laptops and Desktops) (1025px to 1200px)
 				xl: "1280px", // (Large Desktops) (1201px and above)
+				"2xl": "1360px", // (Large Desktops) (1201px and above)
 			},
 		},
 		extend: {
@@ -29,6 +30,7 @@ const config: Config = {
 					400: "#b4c0e0",
 					500: "#66789c",
 					600: "#6c757d",
+					700: "#f8faff",
 				},
 				"js-primary": {
 					400: "#3c65f5",

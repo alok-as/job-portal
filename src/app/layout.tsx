@@ -31,6 +31,7 @@ const RootLayout = async ({
 				<AuthProvider session={session}>
 					<Header />
 					<main className="min-h-screen">{children}</main>
+					<footer className="mt-12">Footer</footer>
 				</AuthProvider>
 				<ToastProvider />
 			</body>

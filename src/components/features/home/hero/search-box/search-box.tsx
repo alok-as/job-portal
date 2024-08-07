@@ -1,4 +1,6 @@
 "use client";
+import { Search } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/tailwind";
 
@@ -44,7 +46,7 @@ export const SearchBox = ({ className, industries }: SearchBoxProps) => {
 				className="outline-none border-none text-sm flex-1 bg-[url('/keyword.svg')] bg-no-repeat pl-8"
 				placeholder="Your Keyword..."
 			/>
-			<Button>Search</Button>
+			<Button icon={<Search size={16} />}>Search</Button>
 		</form>
 	);
 };

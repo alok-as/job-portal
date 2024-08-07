@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { SearchBox } from "@/components/features/home/search-box";
+import { SearchBox } from "@/components/features/home/hero/search-box/search-box";
 
 import { getJobsCount } from "@/services/server/job";
 import { getAllIndustries } from "@/services/server/industries";
@@ -27,20 +27,20 @@ export const Hero = async () => {
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
 						repellendus magni, atque delectus molestias quis?
 					</p>
-					<SearchBox className="mb-20" industries={industries} />
+					<SearchBox className="mb-10" industries={industries} />
 				</div>
 				<Image
 					src="/left-job.svg"
 					alt="Job"
-					width={232}
-					height={201}
+					width={170}
+					height={218}
 					className="absolute bottom-0 left-0 z-10"
 				/>
 				<Image
 					src="/right-job.svg"
 					alt="Job"
-					width={213}
-					height={117}
+					width={170}
+					height={213}
 					className="absolute bottom-0 right-0 z-10"
 				/>
 			</div>
