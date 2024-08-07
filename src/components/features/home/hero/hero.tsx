@@ -24,8 +24,8 @@ export const Hero = async () => {
 						<span>Available Now</span>
 					</h3>
 					<p className="text-sm mb-10 text-js-grey-500 font-medium w-4/5">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-						repellendus magni, atque delectus molestias quis?
+						Discover your next career opportunity or hire top talent. Apply for
+						jobs or post vacancies with ease on our platform.
 					</p>
 					<SearchBox className="mb-10" industries={industries} />
 				</div>
