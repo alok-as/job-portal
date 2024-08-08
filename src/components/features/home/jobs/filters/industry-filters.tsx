@@ -3,5 +3,8 @@ import { getIndustriesWithJobCount } from "@/services/server/industries";
 
 export const IndustryFilters = async () => {
 	const industries = await getIndustriesWithJobCount();
-	return <CheckboxGroup title="Industry" options={industries} />;
+
+	return (
+		<CheckboxGroup name="industry" title="Industry" options={industries} />
+	);
 };

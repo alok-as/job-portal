@@ -3,5 +3,5 @@ import { getJobTypesWithJobCount } from "@/services/server/job-types";
 
 export const JobTypeFilters = async () => {
 	const jobTypes = await getJobTypesWithJobCount();
-	return <CheckboxGroup title="Type" options={jobTypes} />;
+	return <CheckboxGroup name="jobType" title="Type" options={jobTypes} />;
 };

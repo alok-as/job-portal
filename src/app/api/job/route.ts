@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
 import prismaDb from "@/lib/prisma";
+
+import { getAllJobs } from "@/services/server/job";
 import { createJobSchema } from "@/schema/job";
 
 export const POST = async (req: Request) => {
@@ -53,23 +55,8 @@ export const POST = async (req: Request) => {
 
 export const GET = async (req: Request) => {
 	try {
-		const jobs = await prismaDb.job.findMany({
-			select: {
-				id: true,
-				title: true,
-				description: true,
-				industry: true,
-				level: true,
-				type: true,
-				remote: true,
-				skills: {
-					select: {
-						id: true,
-						name: true,
-					},
-				},
-			},
-		});
+		const { searchParams } = new URL(req.url);
+		const jobs = await getAllJobs(searchParams);
 
 		return NextResponse.json(
 			{

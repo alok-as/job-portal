@@ -1,16 +1,17 @@
 "use client";
-import JobCard from "@/components/ui/job-card";
-import { useJobsStore } from "@/store/use-jobs-store";
+import { JobCard } from "@/components/ui/job-card";
 
-import type { JobWithDetails } from "@/types/types";
 import { cn } from "@/utils/tailwind";
+import { useJobsLayoutStore, useJobsStore } from "@/store/use-jobs-store";
+import type { JobWithDetails } from "@/types/types";
 
 export type JobsGridProps = {
-	jobs: JobWithDetails[];
+	initialJobs: JobWithDetails[];
 };
 
-export const JobsGrid = ({ jobs }: JobsGridProps) => {
-	const layout = useJobsStore((state) => state.layout);
+export const JobsGrid = ({ initialJobs }: JobsGridProps) => {
+	const jobs = useJobsStore((state) => state.jobs);
+	const layout = useJobsLayoutStore((state) => state.layout);
 
 	return (
 		<div
@@ -19,7 +20,7 @@ export const JobsGrid = ({ jobs }: JobsGridProps) => {
 				layout === "list" ? "grid-cols-1" : "grid-cols-3"
 			)}
 		>
-			{jobs.map((job) => (
+			{(jobs ?? initialJobs).map((job) => (
 				<JobCard key={job.id} {...job} />
 			))}
 		</div>

@@ -21,7 +21,7 @@ export const SearchBox = ({ className, industries }: SearchBoxProps) => {
 		>
 			<select
 				name="industry"
-				style={{ backgroundPosition: "left 10px center;" }}
+				style={{ backgroundPosition: "left 10px center" }}
 				className="outline-none border-none basis-40 text-js-grey-100 text-sm bg-[url('/industry.svg')] bg-no-repeat pl-8"
 			>
 				<option value="0">Industry</option>
@@ -42,7 +42,7 @@ export const SearchBox = ({ className, industries }: SearchBoxProps) => {
 
 			<input
 				type="text"
-				style={{ backgroundPosition: "left 10px center;" }}
+				style={{ backgroundPosition: "left 10px center" }}
 				className="outline-none border-none text-sm flex-1 bg-[url('/keyword.svg')] bg-no-repeat pl-8"
 				placeholder="Your Keyword..."
 			/>

@@ -3,5 +3,7 @@ import { getRemotesWithJobCount } from "@/services/server/remote";
 
 export const RemoteFilters = async () => {
 	const remotes = await getRemotesWithJobCount();
-	return <CheckboxGroup title="Remote/On-site" options={remotes} />;
+	return (
+		<CheckboxGroup name="remote" title="Remote/On-site" options={remotes} />
+	);
 };

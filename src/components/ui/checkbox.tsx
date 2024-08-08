@@ -2,25 +2,34 @@ import { cn } from "@/utils/tailwind";
 
 export type CheckboxProps = {
 	label: string;
+	value: string;
 	count?: number;
 	checked: boolean;
-	onChange: (checked: boolean) => void;
+	onChange: (value: string, checked: boolean) => void;
 };
 
 export const Checkbox = ({
 	label,
+	value,
 	count = 0,
 	checked,
 	onChange,
 }: CheckboxProps) => (
 	<div className="flex items-center justify-between">
-		<div className="flex items-center gap-2 cursor-pointer">
-			<button
+		<button
+			className="flex items-center gap-2 cursor-pointer"
+			onClick={(e) => {
+				console.log("running");
+				e.preventDefault();
+				e.stopPropagation();
+				onChange(value, !checked);
+			}}
+		>
+			<span
 				className={cn(
 					"flex relative items-center gap-2 border border-[#e0e6f7] w-6 h-6 rounded-md",
 					checked ? "bg-js-primary-400" : "bg-white"
 				)}
-				onClick={() => onChange(!checked)}
 			>
 				{checked && (
 					<svg
@@ -37,9 +46,9 @@ export const Checkbox = ({
 						<polyline points="20 6 9 17 4 12" />
 					</svg>
 				)}
-			</button>
+			</span>
 			<span className="text-sm font-medium text-js-grey-100">{label}</span>
-		</div>
+		</button>
 
 		{count !== undefined && (
 			<small className="v text-js-primary-400 bg-[#e0e6f7] text-xs rounded-lg py-1 px-2">

@@ -11,7 +11,7 @@ import type { JobWithDetails } from "@/types/types";
 
 export type JobCardProps = JobWithDetails;
 
-const JobCard = ({
+export const JobCard = ({
 	id,
 	title,
 	company,
@@ -80,5 +80,3 @@ const JobCard = ({
 		</Link>
 	);
 };
-
-export default JobCard;
