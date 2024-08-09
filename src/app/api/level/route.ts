@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 
 import prismaDb from "@/lib/prisma";
 import { createLevelSchema } from "@/schema/level";
+import { getAllJobTypes } from "@/services/server/job-types";
 
 export const POST = async (req: Request) => {
 	try {
@@ -55,12 +56,7 @@ export const POST = async (req: Request) => {
 
 export const GET = async (req: Request) => {
 	try {
-		const jobTypes = await prismaDb.level.findMany({
-			select: {
-				id: true,
-				name: true,
-			},
-		});
+		const jobTypes = await getAllJobTypes();
 
 		return NextResponse.json(
 			{

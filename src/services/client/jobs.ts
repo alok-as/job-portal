@@ -1,8 +1,9 @@
 import { type JobWithDetails } from "@/types/types";
 
-export const getJobs = async (query: string) => {
+export const getJobs = async (query?: string) => {
 	try {
-		const response = await fetch(`/api/job?${query}`, {
+		const url = query ? `/api/job?${query}` : "/api/job";
+		const response = await fetch(url, {
 			method: "GET",
 		});
 		const data = await response.json();

@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 
 import prismaDb from "@/lib/prisma";
 import { createRemoteSchema } from "@/schema/remote";
+import { getAllRemotes } from "@/services/server/remote";
 
 export const POST = async (req: Request) => {
 	try {
@@ -55,12 +56,7 @@ export const POST = async (req: Request) => {
 
 export const GET = async (req: Request) => {
 	try {
-		const jobTypes = await prismaDb.remote.findMany({
-			select: {
-				id: true,
-				name: true,
-			},
-		});
+		const jobTypes = await getAllRemotes();
 
 		return NextResponse.json(
 			{

@@ -1,3 +1,5 @@
+import prismaDb from "@/lib/prisma";
+
 export const generateSearchParams = (paramsObj: {
 	[key: string]: string | string[];
 }) => {
@@ -12,4 +14,14 @@ export const generateSearchParams = (paramsObj: {
 	}
 
 	return params;
+};
+
+export const resetDB = async () => {
+	await prismaDb.$transaction([
+		prismaDb.job.deleteMany(),
+		prismaDb.industry.deleteMany(),
+		prismaDb.level.deleteMany(),
+		prismaDb.remote.deleteMany(),
+		prismaDb.jobType.deleteMany(),
+	]);
 };

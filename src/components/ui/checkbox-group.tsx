@@ -9,7 +9,12 @@ import { getJobs } from "@/services/client/jobs";
 export type CheckboxGroupProps = {
 	name: string;
 	title: string;
-	options: { id: string; name: string; _count: { jobs: number } }[];
+	options: {
+		id: string;
+		name: string;
+		slug: string | null;
+		_count: { jobs: number };
+	}[];
 };
 
 export const CheckboxGroup = ({ title, name, options }: CheckboxGroupProps) => {
@@ -52,6 +57,10 @@ export const CheckboxGroup = ({ title, name, options }: CheckboxGroupProps) => {
 	};
 
 	useEffect(() => {
+		setFilters(searchParams.getAll(name));
+	}, [searchParams]);
+
+	useEffect(() => {
 		if (resetJobs) {
 			setFilters([]);
 			setResetJobs(false);
@@ -69,8 +78,8 @@ export const CheckboxGroup = ({ title, name, options }: CheckboxGroupProps) => {
 						<Checkbox
 							label={option.name}
 							count={option._count.jobs}
-							value={option.id}
-							checked={filters.includes(option.id)}
+							value={option.slug ?? option.id}
+							checked={filters.includes(option.slug ?? option.id)}
 							onChange={onChangeFilter}
 						/>
 					</li>

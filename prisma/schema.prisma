@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -87,25 +88,37 @@ model Company {
 model Industry {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
+  slug String? 
   jobs  Job[]
+
+ @@index([slug]) 
 }
 
 model JobType {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
+  slug String?
   jobs  Job[]
+
+  @@index([slug])
 }
 
 model Remote {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
+  slug String? 
   jobs  Job[]
+
+  @@index([slug])
 }
 
 model Level {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
+  slug String? 
   jobs  Job[]
+
+  @@index([slug])
 }
 
 model Job {

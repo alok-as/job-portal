@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 
 import prismaDb from "@/lib/prisma";
 import { createIndustrySchema } from "@/schema/industry";
+import { getAllIndustries } from "@/services/server/industries";
 
 export const POST = async (req: Request) => {
 	try {
@@ -55,12 +56,7 @@ export const POST = async (req: Request) => {
 
 export const GET = async (req: Request) => {
 	try {
-		const industries = await prismaDb.industry.findMany({
-			select: {
-				id: true,
-				name: true,
-			},
-		});
+		const industries = await getAllIndustries();
 
 		return NextResponse.json(
 			{

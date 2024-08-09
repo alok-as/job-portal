@@ -1,5 +1,4 @@
 import prismaDb from "@/lib/prisma";
-import { isValidMongoId } from "@/utils/mongodb";
 
 export const getJobsCount = () => prismaDb.job.count({});
 
@@ -8,36 +7,54 @@ export const getAllJobs = (params: URLSearchParams) => {
 	const level = params.getAll("level");
 	const jobType = params.getAll("jobType");
 	const remote = params.getAll("remote");
-
-	console.log("industry", industry);
+	const search = params.get("search");
 
 	return prismaDb.job.findMany({
 		where: {
+			OR: [
+				{
+					title: {
+						contains: search ?? "",
+						mode: "insensitive",
+					},
+				},
+				{
+					description: {
+						contains: search ?? "",
+						mode: "insensitive",
+					},
+				},
+				{
+					company: {
+						name: { contains: search ?? "", mode: "insensitive" },
+					},
+				},
+			],
 			...(industry.length !== 0 && {
 				industry: {
-					id: {
-						in: industry.filter(isValidMongoId),
+					slug: {
+						in: industry,
 					},
 				},
 			}),
 			...(level.length !== 0 && {
 				level: {
-					id: {
-						in: level.filter(isValidMongoId),
+					slug: {
+						in: level,
 					},
 				},
 			}),
 			...(jobType.length !== 0 && {
 				type: {
-					id: {
-						in: jobType.filter(isValidMongoId),
+					slug: {
+						in: jobType,
 					},
 				},
 			}),
 			...(remote.length !== 0 && {
 				remote: {
-					id: {
-						in: remote.filter(isValidMongoId),
+					slug: {
+						in: remote,
 					},
 				},
 			}),
