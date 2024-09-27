@@ -22,7 +22,7 @@ export const JobCard = ({
 }: JobCardProps) => {
 	return (
 		<Link href={`/jobs/${id}`}>
-			<article className="relative rounded-lg bg-js-grey-700 border border-[#e0e6f7] px-5 py-7 hover:bg-white hover:-translate-y-2 transition duration-200 ease-[cubic-bezier(.02,.01,.47,1)]">
+			<article className="relative rounded-lg h-full bg-js-grey-700 border border-[#e0e6f7] px-5 py-7 hover:bg-white hover:-translate-y-2 transition duration-200 ease-[cubic-bezier(.02,.01,.47,1)] flex flex-col">
 				<span className="absolute top-3 right-5">
 					<Image src="/flash.svg" alt="featured" width={24} height={24} />
 				</span>
@@ -45,7 +45,7 @@ export const JobCard = ({
 					</div>
 				</div>
 
-				<div>
+				<div className="flex-1">
 					<h4 className="text-base font-semibold text-js-primary-800 mt-5 mb-1">
 						{title}
 					</h4>
@@ -60,7 +60,7 @@ export const JobCard = ({
 						</span>
 					</span>
 
-					<p className="mt-4 text-js-grey-100 text-sm font-medium">
+					<p className="mt-4 text-js-grey-100 text-sm font-medium line-clamp-3">
 						{description}
 					</p>
 
@@ -69,12 +69,12 @@ export const JobCard = ({
 							<SkillBox key={skill.id} name={skill.name} />
 						))}
 					</div>
+				</div>
 
-					<div className="flex justify-end mt-8">
-						<Button variant="secondary" size="sm">
-							Apply Now
-						</Button>
-					</div>
+				<div className="flex justify-end mt-8">
+					<Button variant="secondary" size="sm">
+						Apply Now
+					</Button>
 				</div>
 			</article>
 		</Link>

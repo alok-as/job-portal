@@ -1,3 +1,4 @@
+import { type JobFields } from "@/schema/job";
 import { type JobWithDetails } from "@/types/types";
 
 export const getJobs = async (query?: string) => {
@@ -16,3 +17,9 @@ export const getJobs = async (query?: string) => {
 		return [];
 	}
 };
+
+export const createJob = (fields: JobFields) =>
+	fetch("/api/job", {
+		method: "POST",
+		body: JSON.stringify(fields),
+	});

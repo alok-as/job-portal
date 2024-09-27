@@ -24,6 +24,19 @@ const links = [
 	},
 ];
 
+const companyLinks = [
+	{
+		title: "Profile",
+		href: "/company/profile",
+		type: "secondary" as const,
+	},
+	{
+		title: "Post a Job",
+		href: "/company/post-job",
+		type: "secondary" as const,
+	},
+];
+
 export const Header = async () => {
 	const session = await getServerSession(authOptions);
 
@@ -34,7 +47,22 @@ export const Header = async () => {
 				<nav>
 					<ul className="flex items-center gap-6">
 						{session ? (
-							<LogoutButton />
+							<>
+								{session.user?.role === "company" ? (
+									<>
+										{companyLinks.map((link) => (
+											<HeaderLink
+												key={link.title}
+												href={link.href}
+												type={link.type}
+											>
+												{link.title}
+											</HeaderLink>
+										))}
+									</>
+								) : null}
+								<LogoutButton />
+							</>
 						) : (
 							links.map((link) => (
 								<HeaderLink key={link.title} href={link.href} type={link.type}>

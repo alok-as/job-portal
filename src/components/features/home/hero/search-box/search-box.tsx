@@ -1,12 +1,15 @@
 "use client";
 import { FormEvent } from "react";
+import { useRouter } from "next-nprogress-bar"
+import { useSearchParams } from "next/navigation";
+
 import { Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/tailwind";
 
 import { type Industry } from "@prisma/client";
-import { useRouter, useSearchParams } from "next/navigation";
+
 
 export type SearchBoxProps = {
 	className?: string;

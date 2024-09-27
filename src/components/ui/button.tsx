@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/tailwind";
 
 export const buttonVariants = cva(
-	"transition duration-200 disabled:bg-js-grey-600 flex items-center gap-2",
+	"transition duration-200 disabled:bg-js-grey-600 flex justify-center items-center gap-2",
 	{
 		variants: {
 			variant: {

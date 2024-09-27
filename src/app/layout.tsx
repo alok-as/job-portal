@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 
 import { ToastProvider } from "@/providers/toast-provider";
 import { AuthProvider } from "@/providers/auth-provider";
+import ProgressProvider from "@/providers/progress-provider";
+
 import { Header } from "@/components/layout/header";
 
 import { getServerSession } from "next-auth";
@@ -34,6 +36,7 @@ const RootLayout = async ({
 					<footer className="mt-12">Footer</footer>
 				</AuthProvider>
 				<ToastProvider />
+				<ProgressProvider />
 			</body>
 		</html>
 	);

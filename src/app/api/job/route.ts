@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
 
+import { authOptions } from "@/lib/auth";
 import prismaDb from "@/lib/prisma";
 
 import { getAllJobs } from "@/services/server/job";
@@ -7,6 +9,18 @@ import { createJobSchema } from "@/schema/job";
 
 export const POST = async (req: Request) => {
 	try {
+		const session = await getServerSession(authOptions);
+		if (!session?.user) {
+			return NextResponse.json(
+				{
+					success: false,
+					data: null,
+					message: "Unauthenticated",
+				},
+				{ status: 401 }
+			);
+		}
+
 		const reqData = await req.json();
 		const {
 			title,
@@ -27,7 +41,7 @@ export const POST = async (req: Request) => {
 				levelId,
 				remoteId,
 				skillIds,
-				companyId: "66a7d35e0ac9813765ff5a07",
+				companyId: session.user.id,
 			},
 		});
 

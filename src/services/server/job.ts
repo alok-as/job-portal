@@ -2,7 +2,9 @@ import prismaDb from "@/lib/prisma";
 
 export const getJobsCount = () => prismaDb.job.count({});
 
-export const getAllJobs = (params: URLSearchParams) => {
+export const getAllJobs = async (params: URLSearchParams) => {
+	console.log("fetching from database");
+
 	const industry = params.getAll("industry");
 	const level = params.getAll("level");
 	const jobType = params.getAll("jobType");

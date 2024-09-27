@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 import { signIn } from "next-auth/react";
 
 import { SubmitHandler, useForm } from "react-hook-form";
