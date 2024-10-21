@@ -31,6 +31,11 @@ const companyLinks = [
 		type: "secondary" as const,
 	},
 	{
+		title: "Listings",
+		href: "/company/listing",
+		type: "secondary" as const,
+	},
+	{
 		title: "Post a Job",
 		href: "/company/post-job",
 		type: "secondary" as const,

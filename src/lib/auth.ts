@@ -1,4 +1,6 @@
 import { type AuthOptions } from "next-auth";
+import type { Company, Candidate } from "@prisma/client";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -25,29 +27,22 @@ export const authOptions: AuthOptions = {
 			async authorize(credentials) {
 				if (!credentials) return null;
 
+				let record: Company | Candidate | null;
+
 				if (credentials.userType === "company") {
-					const company = await getCompany(credentials.email);
-					if (!company) return null;
-
-					const isPasswordCorrect = await compareHash(
-						credentials.password,
-						company.password
-					);
-					if (!isPasswordCorrect) return null;
-
-					return { ...company, role: "company" };
+					record = await getCompany(credentials.email);
+				} else {
+					record = await getCandidate(credentials.email);
 				}
 
-				const candidate = await getCandidate(credentials.email);
-				if (!candidate) return null;
-
+				if (!record) return null;
 				const isPasswordCorrect = await compareHash(
 					credentials.password,
-					candidate.password
+					record.password
 				);
 				if (!isPasswordCorrect) return null;
 
-				return { ...candidate, role: "candidate" };
+				return { ...record, role: credentials.userType };
 			},
 		}),
 		GoogleProvider({
