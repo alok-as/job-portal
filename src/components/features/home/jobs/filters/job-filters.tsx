@@ -7,7 +7,7 @@ import { JobTypeFilters } from "@/components/features/home/jobs/filters/job-type
 import { RemoteFilters } from "@/components/features/home/jobs/filters/remote-filters";
 
 export const JobFilters = () => (
-	<div>
+	<div className="sticky top-10 z-20 max-h-[80vh] overflow-y-auto scrollbar">
 		<ResetFilters />
 		<div className="flex flex-col gap-8">
 			<Suspense fallback={<p>Loading Industries...</p>}>

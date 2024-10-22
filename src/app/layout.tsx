@@ -32,7 +32,7 @@ const RootLayout = async ({
 			<body className={inter.className}>
 				<AuthProvider session={session}>
 					<Header />
-					<main className="min-h-screen overflow-x-hidden">{children}</main>
+					<main className="min-h-screen">{children}</main>
 					<footer className="mt-12">Footer</footer>
 				</AuthProvider>
 				<ToastProvider />

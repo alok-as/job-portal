@@ -7,7 +7,7 @@ import type { JobWithDetails } from "@/types/types";
 const JobsLayout = ({ jobs }: { jobs: JobWithDetails[] }) => {
 	return (
 		<>
-			<aside className="basis-3/12">
+			<aside className="hidden lg:block basis-3/12 relative">
 				<JobFilters />
 			</aside>
 			<div className="flex-1">

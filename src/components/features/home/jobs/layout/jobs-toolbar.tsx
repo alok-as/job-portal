@@ -15,7 +15,7 @@ export const JobsToolbar = () => {
 			<button
 				type="button"
 				className={cn(
-					"border border-[#B4C0E0] p-1 rounded-md",
+					"border border-[#B4C0E0] p-1 rounded-md hidden sm:block",
 					layout === "list" && "bg-js-primary-400"
 				)}
 				onClick={() => setLayout("list")}
@@ -28,7 +28,7 @@ export const JobsToolbar = () => {
 			<button
 				type="button"
 				className={cn(
-					"border border-[#B4C0E0] p-1 rounded-md",
+					"border border-[#B4C0E0] p-1 rounded-md hidden sm:block",
 					layout === "grid" && "bg-js-primary-400"
 				)}
 				onClick={() => setLayout("grid")}

@@ -17,7 +17,9 @@ export const JobsGrid = ({ initialJobs }: JobsGridProps) => {
 		<div
 			className={cn(
 				"grid gap-4",
-				layout === "list" ? "grid-cols-1" : "grid-cols-3"
+				layout === "list"
+					? "grid-cols-1"
+					: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
 			)}
 		>
 			{(jobs ?? initialJobs).map((job) => (
