@@ -15,7 +15,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "JobScout: Premier Job Portal for Hiring and Careers",
+	title: "ScoutJob: Premier Job Portal for Hiring and Careers",
 	description:
 		"Job search made easy with our premier job portal. Find the latest job openings, connect with employers, and kickstart your career. Simplify your job search and find the right opportunity with us today!",
 };
@@ -32,7 +32,7 @@ const RootLayout = async ({
 			<body className={inter.className}>
 				<AuthProvider session={session}>
 					<Header />
-					<main className="min-h-screen">{children}</main>
+					<main className="min-h-screen overflow-x-hidden">{children}</main>
 					<footer className="mt-12">Footer</footer>
 				</AuthProvider>
 				<ToastProvider />
